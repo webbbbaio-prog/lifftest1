@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <script
+    src="https://static.line-scdn.net/liff/edge/2/sdk.js">
+  </script>
+</head>
+
+<body>
+
+<h2>LIFF Test</h2>
+
+<pre id="debug"></pre>
+
+<script>
+
+const LIFF_ID = '2007329748-JdexWGRz';
+
+const debug =
+  document.getElementById('debug');
+
+function log(text) {
+
+  debug.textContent +=
+    text + '\n';
+
+}
+
+async function start() {
+
+  log(
+    'liff exists = ' +
+    (typeof liff !== 'undefined')
+  );
+
+  log(
+    'href = ' +
+    location.href
+  );
+
+  try {
+
+    log(
+      '開始 liff.init()'
+    );
+
+    await liff.init({
+      liffId: LIFF_ID
+    });
+
+    log(
+      'liff.init 成功'
+    );
+
+    log(
+      'isInClient = ' +
+      liff.isInClient()
+    );
+
+    log(
+      'isLoggedIn = ' +
+      liff.isLoggedIn()
+    );
+	
+	log('開始 getFriendship()');
+
+    const friendship = await liff.getFriendship();
+
+    log(
+      'getFriendship 成功'
+    );
+
+    log(
+      'friendFlag = ' +
+      friendship.friendFlag
+    );
+
+  } catch (err) {
+
+    log(
+      'ERROR CODE = ' +
+      err.code
+    );
+
+    log(
+      'ERROR MESSAGE = ' +
+      err.message
+    );
+
+  }
+
+}
+
+start();
+
+</script>
+
+</body>
+</html>
